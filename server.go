@@ -50,11 +50,7 @@ func accept(fd int, sess chan string, q queue.Queue) {
             fmt.Println("read error")
         }
         f, _ := os.OpenFile("socket.log", os.O_CREATE | os.O_APPEND | os.O_RDWR, 0660)
-        //f.WriteString(string(buffer[:length]))
         f.WriteString(string(length))
-        if string(buffer[:length-1]) == "get" {
-            f.WriteString("yes")
-        }
         f.Close()
 
         switch string(buffer[:length-2]) {
@@ -62,9 +58,6 @@ func accept(fd int, sess chan string, q queue.Queue) {
                 s := get(q)
                 syscall.Write(fd, []byte(s))
                 break;
-    //        case "set":
-    //            set(string(buffer[:length-2]), q)
-    //            break;
             case "len":
                 s := lenght(q)
                 syscall.Write(fd,[]byte(s))
