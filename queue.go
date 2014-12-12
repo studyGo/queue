@@ -1,7 +1,6 @@
-package main
+package queue
 
 import (
-    "fmt"
     "container/list"
 )
 
@@ -26,8 +25,8 @@ func (q Queue) LPush(v string) {
 }
 
 func (q Queue) LPop() interface{} {
-    if q.list.Len == 0 {
-        return
+    if q.list.Len() == 0 {
+        return ""
     }
     ele := q.list.Front()
     q.v = q.list.Remove(ele)
@@ -35,8 +34,8 @@ func (q Queue) LPop() interface{} {
 }
 
 func (q Queue) RPop() interface{} {
-    if q.list.Len == 0 {
-        return
+    if q.list.Len() == 0 {
+        return ""
     }
     ele := q.list.Back()
     q.v = q.list.Remove(ele)
@@ -54,7 +53,7 @@ func (q Queue) Len() int {
 func (q Queue) LastVal() interface{} {
     return q.v
 }
-
+/*
 func main () {
     q := Create()
     fmt.Println(q.v)
@@ -67,3 +66,4 @@ func main () {
     fmt.Println(q.Len())
     fmt.Println(q.LPop())
 }
+*/
